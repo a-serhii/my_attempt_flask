@@ -5,6 +5,10 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Hello, {{ name|capitalize }} !</h1>
+    {% if name == 'serzh' %}
+        <h1>Hello, Sergey!</h1>
+    {% else %}
+        <h1>Hello, {{ name|capitalize }}!</h1>
+    {% endif %}
 </body>
 </html>
