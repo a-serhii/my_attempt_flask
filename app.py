@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, redirect
 app = Flask(__name__)
 # Создаем экзэмпляр приложения
 
@@ -17,6 +17,18 @@ def user(name):
 def your_browser():
     user_agent = request.headers.get('User-Agent')
     return '<p>Your browser is %s</p>' % user_agent
+
+
+@app.route('/cookie/')
+def cookie():
+    response = make_response('<h1>This document carries a cookie!</h1>')
+    response.set_cookie('answer', '42')
+    return response
+
+
+@app.route('/habr/')
+def habr():
+    return redirect('https://habrahabr.ru/')
 
 
 if __name__ == '__main__':
