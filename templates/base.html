@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <title> {% block title %} {% endblock %} - My application </title>
+    {% endblock %}
+    <style>
+        body{
+            color: red;;
+        }
+    </style>
+</head>
+<body>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>
