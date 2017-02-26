@@ -1,16 +1,16 @@
-from flask import Flask, request, make_response, redirect
+from flask import Flask, request, make_response, redirect, render_template
 app = Flask(__name__)
 # Создаем экзэмпляр приложения
 
 
-@app.route('/') # Ассоциация между адресом url и функцией
+@app.route('/')  # Ассоциация между адресом url и функцией
 def index():
-    return '<h1>Hello, world!</h1>'
+    return render_template('index.html')
 
 
-@app.route('/user/<name>') # Включим переменный компонент name
+@app.route('/user/<name>')  # Включим переменный компонент name
 def user(name):
-    return '<h1>Hello, %s!</h1>' % name
+    return render_template('user.html', name=name)
 
 
 @app.route('/browser/')
