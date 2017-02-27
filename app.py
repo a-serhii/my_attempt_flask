@@ -1,6 +1,8 @@
 from flask import Flask, request, make_response, redirect, render_template
+from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 # Создаем экзэмпляр приложения
+bootstrap = Bootstrap(app)
 
 
 @app.route('/')  # Ассоциация между адресом url и функцией
