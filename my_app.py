@@ -2,16 +2,32 @@ from flask import Flask, request, make_response, redirect, render_template
 from flask.ext.moment import Moment
 from flask_bootstrap import Bootstrap
 from datetime import datetime
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import Required
 
 app = Flask(__name__)
 # Создаем экзэмпляр приложения
+app.config['SECRET_KEY'] = 'hard to guess string'
+# Настраиваем ключ шифрования
+
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 
 
-@app.route('/')  # Ассоциация между адресом url и функцией
+class NameForm(FlaskForm):
+    name = StringField('What is your name, dude?', validators=[Required()])
+    submit = SubmitField('Submit')
+
+
+@app.route('/', methods=['GET', 'POST'])  # Ассоциация между адресом url и функцией
 def index():
-    return render_template('index.html', current_time=datetime.utcnow())
+    name = None
+    form = NameForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+    return render_template('index.html', current_time=datetime.utcnow(), form=form, name=name )
 
 
 @app.route('/user/<name>')  # Включим переменный компонент name
