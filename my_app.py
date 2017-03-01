@@ -1,5 +1,5 @@
-from flask import Flask, request, make_response, redirect, render_template, session, url_for
-from flask.ext.moment import Moment
+from flask import Flask, request, make_response, redirect, render_template, session, url_for, flash
+from flask_moment import Moment
 from flask_bootstrap import Bootstrap
 from datetime import datetime
 from flask_wtf import FlaskForm
