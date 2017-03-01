@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template
+from flask import Flask, request, make_response, redirect, render_template, session, url_for
 from flask.ext.moment import Moment
 from flask_bootstrap import Bootstrap
 from datetime import datetime
@@ -22,12 +22,11 @@ class NameForm(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])  # Ассоциация между адресом url и функцией
 def index():
-    name = None
     form = NameForm()
     if form.validate_on_submit():
-        name = form.name.data
-        form.name.data = ''
-    return render_template('index.html', current_time=datetime.utcnow(), form=form, name=name )
+        session['name'] = form.name.data
+        return redirect(url_for('index'))
+    return render_template('index.html', current_time=datetime.utcnow(), form=form, name=session.get('name') )
 
 
 @app.route('/user/<name>')  # Включим переменный компонент name
